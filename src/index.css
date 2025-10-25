@@ -1,0 +1,37 @@
+@import "tailwindcss";
+
+html,body{
+  height: 100%;
+  width: 100%;
+}
+
+body{
+  background-color: black;
+  color: white;
+ overflow-x: hidden;
+ transition: all 1s;
+ scroll-behavior: smooth !important;
+ filter: contrast(100%);
+}
+
+.Navbar{
+  position: fixed !important;
+
+}
+/* hide scrollbar but keep scrolling (cross-browser) */
+.scrollAto {
+  overflow: auto;              /* allow scrolling */
+  -ms-overflow-style: none;    /* IE and Edge */
+  scrollbar-width: none;       /* Firefox */
+}
+
+/* for WebKit browsers (Chrome, Safari) */
+.scrollAto::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+
+
+
+
