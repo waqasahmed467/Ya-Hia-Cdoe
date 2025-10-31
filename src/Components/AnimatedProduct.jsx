@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { motion } from "motion/react"
 const AnimatedProduct = () => {
+
+    
     const [rotate, setRotate] = useState(0);
     const [rotateArray, setrotateArray] = useState([0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330])
     const [scale, setscale] = useState(0)

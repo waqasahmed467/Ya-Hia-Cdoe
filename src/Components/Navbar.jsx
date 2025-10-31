@@ -11,7 +11,7 @@ const Navbar = () => {
 
   return (
     <div className='Navbar z-20 fixed flex gap-3 justify-between items-center h-16 text-white left-[50%] -translate-x-[50%] w-[90%]  rounded-full top-1 backdrop-blur-lg md:px-8 bg-black/20  '>
-      <Link to={'/'} onClick={() => {
+      <Link to={'/shoppingApp'} onClick={() => {
       }}
       >
 

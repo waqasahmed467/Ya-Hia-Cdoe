@@ -32,10 +32,10 @@ const App = () => {
 <BackgroundText/>
 
       <Routes>
-        <Route path="/" element={<Home  />} />
-        <Route path="/CardDetails" element={<CardDetails />} />
-        <Route path="/Dashboard" element={<DashboardData>  <MainDashboard /> </DashboardData>} />
-        <Route path="/ManageProduct" element={<ManageProduct />} />
+        <Route path="/shoppingApp" element={<Home  />} />
+        <Route path="/shoppingApp/CardDetails" element={<CardDetails />} />
+        <Route path="/shoppingApp/Dashboard" element={<DashboardData>  <MainDashboard /> </DashboardData>} />
+        <Route path="/shoppingApp/ManageProduct" element={<ManageProduct />} />
       </Routes>
     </motion.div>
      <ToastContainer position="top-center" autoClose={2000} hideProgressBar />

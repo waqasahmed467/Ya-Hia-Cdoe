@@ -4,17 +4,26 @@ import { ContextProvider } from "../Context/ProductContext";
 import Navbar from "./Navbar";
 
 const CardDetails = () => {
-  const { colors, index } = useContext(ContextProvider);
+  const { colors, index ,addTocart,DomainName,ProductDeteils} = useContext(ContextProvider);
   const [qty, setQty] = useState(1);
   const [price, setPrice] = useState(900);
- const basePrice = 900; 
-    const handleIncrease = () => {
-    setQty((prev) => {
+
+  console.log(ProductDeteils);
+  
+ const basePrice = 900;
+
+const handleIncrease = () => {
+  setQty((prev) => {
+    if (prev < ProductDeteils.quntity) {
       const newQty = prev + 1;
-      setPrice(basePrice * newQty); // total price update
+      setPrice(basePrice * newQty); // update total price
       return newQty;
-    });
-  };
+    } else {
+      return prev; // 👈 prevent undefined
+    }
+  });
+};
+
 
    const handleDecrease = () => {
     setQty((prev) => {
@@ -40,21 +49,23 @@ const CardDetails = () => {
       
       {/* Main Content */}
       <div className="flex flex-col md:flex-row items-center gap-10 bg-white/10 backdrop-blur-lg p-10 rounded-3xl shadow-2xl border border-white/20 w-full max-w-6xl">
-        
-        {/* Left: Product Image */}
-        <motion.div
+        {
+<motion.div
           initial={{ x: -50, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.8 }}
           className="flex-1 flex justify-center"
         >
           <img
-            src="/1.jpeg"
+            src={`${DomainName}upload/${ProductDeteils.img}`}
             alt="Product"
             className="w-[350px] md:w-[450px] rounded-3xl shadow-lg"
           />
         </motion.div>
 
+        }
+        {/* Left: Product Image */}
+        
         {/* Right: Product Info */}
         <motion.div
           initial={{ x: 50, opacity: 0 }}
@@ -63,12 +74,12 @@ const CardDetails = () => {
           className="flex-1 text-white"
         >
           <h1 className="text-4xl md:text-6xl font-bold mb-4 tracking-tight">
-            Luxury Leather Jacket
+            {ProductDeteils.title}
           </h1>
           <p className="text-gray-200 text-lg mb-6 leading-relaxed">
-            Step up your style with our premium leather jacket. Designed for comfort, crafted with precision, and made to last. Perfect for casual outings or special occasions.
+            {ProductDeteils.description}
           </p>
-            <h2 className="text-5xl font-semibold text-yellow-400">${price}</h2>
+            <h2 className="text-5xl font-semibold text-yellow-400">${ProductDeteils.price}</h2>
 
 
           {/* Price and Options */}
@@ -131,6 +142,9 @@ const CardDetails = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             transition={{ type: "spring", stiffness: 200 }}
+            onClick={
+              ()=>addTocart(ProductDeteils.id)
+            }
             className="relative overflow-hidden bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-bold text-lg px-10 py-4 rounded-full shadow-lg"
           >
             <span className="relative z-10 flex items-center justify-center gap-2">

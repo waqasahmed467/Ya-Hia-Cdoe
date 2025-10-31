@@ -5,43 +5,42 @@ import { DashboardContext } from '../Context/DashboardContext'
 import { ContextProvider } from '../Context/ProductContext'
 import { toast } from 'react-toastify'
 import AddTocartSlideBar from './AddTocartSlideBar'
+import axios from 'axios'
 
 const CardMain = ({bgColor}) => {
-   const  {setAddTOCardSildeShow,fetchCartItems,allProductDataDB,DomainName}= useContext(ContextProvider)
+   const  {setAddTOCardSildeShow,addTocart,setProductDeteils,setReverceCart,fetchCartItems,allProductDataDB,DomainName}= useContext(ContextProvider)
 
 
   const navigate =  useNavigate()
-  const MoveToCardDetails = ()=>{
-    navigate('/CardDetails')
+  const MoveToCardDetails = async(id)=>{
+
+try{
+  const res =await axios.get(`${DomainName}api/ProductDeteils${id}`)
+  console.log(res.data);
+  setProductDeteils(res.data)
+  navigate('/shoppingApp/CardDetails')
     window.scrollTo({
       top:0,
       behavior:'smooth'
     });
-  }
-    
-    
-
-const addTocart = (i)=>{
-  const  addTocartarry=JSON.parse(localStorage.getItem('cartItems')) ||   []
-  
-  if(!addTocartarry.includes(i)){
-    addTocartarry.push(i)
-    localStorage.setItem('cartItems' ,JSON.stringify(addTocartarry))
-//  toast.success('items Add SucsessFully')
-setAddTOCardSildeShow(true)
-fetchCartItems()
-
-  }
-  else{
-    console.log('items already exits');
-  }
-
-    
-
-
- 
   
 }
+catch(error){
+
+}
+
+  
+    
+    
+
+
+
+
+
+  }
+    
+    
+
 
 
 
@@ -79,11 +78,11 @@ fetchCartItems()
     }}
     className='text-white font-sans relative -mt-20 z-[1000] text-shadow-2xs text-center text-7xl font-bold'>
       Man's Collections</motion.h1>
-      <div className="mt-20 flex flex-wrap justify-center gap-8 pb-16 relative z-10">
-        {allProductDataDB.map((item, i) => (
+      <div className={`mt-20 flex flex-wrap ${allProductDataDB.length > 0 ? null :'h-[80vh]' } justify-center gap-8 pb-16 relative z-10`}>
+        {allProductDataDB.length > 0 ? allProductDataDB.map((item, i) => (
           <motion.div 
           
-          onClick={MoveToCardDetails}
+          onClick={()=>MoveToCardDetails(item.id)}
             key={i}
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -126,7 +125,7 @@ fetchCartItems()
 </motion.button>
 
           </motion.div>
-        ))}
+        )):<h1 className='text-3xl'>No Product found</h1>}
       </div></motion.div>
   )
 }

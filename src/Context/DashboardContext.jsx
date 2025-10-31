@@ -16,11 +16,30 @@ export const DashboardData = ({ children }) => {
    const [quntity, setquntity] = useState("");
    const [DomainName, setDomainName] = useState('http://127.0.0.1:8000/')
    const [image, setimage] = useState('')
-   
+   const [AnimatedShow, setAnimatedShow] = useState([])
    const [allProductDataDB, setallProductDataDB] = useState([])
 
    
-   
+   const handleProductAnimated=async ()=>{
+    try{
+
+      const res = await axios.get(`${DomainName}api/AnimatedProduct`)
+      setAnimatedShow(res.data)
+    }
+    catch(error){
+      console.log(error.responce);
+      
+
+    }
+
+
+
+
+
+   }
+
+
+
 
    const  handleProductDataUpload = async()=>{
 
@@ -57,15 +76,34 @@ export const DashboardData = ({ children }) => {
     
 
    } 
+
+   const handleDataDelete = (Id)=>{
+
+    try{
+
+      const  res = axios.get(`${DomainName}api/DeleteProduct${Id}`);
+      console.log(res.data.msg);
+    } 
+catch(error){
+  
+
+}
+
+   
+    
+
+
+
+   }
   
    useEffect(()=>{
     ProductDataShow()
-
-   },[ProductDataShow])
+handleProductAnimated()
+   },[ProductDataShow,handleProductAnimated])
   
   return (
-    <DashboardContext.Provider value={{image,setimage,
-      handleProductDataUpload,
+    <DashboardContext.Provider value={{image,setimage,handleProductAnimated,
+     AnimatedShow, handleProductDataUpload,handleDataDelete,
       price,setprice,setquntity,allProductDataDB,
       preview,setPreview,ProductDec,quntity, setProductDec,ProductTitle,setProductTitle,ActiveDash, setActiveDash }}>
       {children}

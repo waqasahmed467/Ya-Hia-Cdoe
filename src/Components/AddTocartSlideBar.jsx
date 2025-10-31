@@ -1,15 +1,54 @@
 import React, { useContext, useEffect, useState } from "react";
 import { ContextProvider } from "../Context/ProductContext";
 import { motion, AnimatePresence } from "framer-motion";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const AddTocartSlideBar = () => {
+  const navigate =  useNavigate()
   const {
     AddTOCardSildeShow,
+    setProductDeteils,
     fetchCartItems,
     setAddTOCardSildeShow,
+    ReverceCart,DomainName,
     CartDbItems,
   } = useContext(ContextProvider);
   const [scrollY, setScrollY] = useState(0);
+
+ const newCart =  CartDbItems.reverse();
+
+ 
+ const MoveToCardDetails = async(id)=>{
+console.log('dasda');
+
+try{
+  const res =await axios.get(`${DomainName}api/ProductDeteils${id}`)
+  console.log(res.data);
+  setProductDeteils(res.data)
+  navigate('/shoppingApp/CardDetails')
+    window.scrollTo({
+      top:0,
+      behavior:'smooth'
+    });
+    setAddTOCardSildeShow(false)
+  
+}
+catch(error){
+
+}
+
+  
+    
+    
+
+
+
+
+
+  }
+ 
+ 
 
   // Scroll par sidebar move aur hide
   useEffect(() => {
@@ -33,6 +72,7 @@ const AddTocartSlideBar = () => {
 
   return (
     <motion.div
+    
       animate={{
         x: AddTOCardSildeShow ? 0 : 310, // slide open/close
         y: scrollY * 1, // scroll ke sath move
@@ -44,12 +84,18 @@ const AddTocartSlideBar = () => {
         <div className="p-4 font-semibold text-lg">🛒 Add To Cart</div>
         <button onClick={() => setAddTOCardSildeShow(false)}>X</button>
       </div>
+      <hr />
 
       <div className="h-full overflow-auto space-y-4 p-2">
         <AnimatePresence>
-          {CartDbItems.map((items) => (
+          {ReverceCart.map((items,i) => (
             <motion.div
-              key={items.id}
+            whileHover={{
+      backgroundColor :'gray',
+      cursor:'pointer'
+    }}
+            onClick={(e)=>{e.stopPropagation(), MoveToCardDetails(items.id)}}
+              key={i}
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{
