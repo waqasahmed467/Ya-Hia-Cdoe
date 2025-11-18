@@ -10,7 +10,7 @@ import ManageProduct from './DashboardControls/ManageProduct'
 import { DashboardData } from './Context/DashboardContext'
 import { ToastContainer } from 'react-toastify'
 import AddTocartSlideBar from './Components/AddTocartSlideBar'
-import Mainscreen from './DashboardControls/signUp&signin/mainscreen'
+import Mainscreen from './DashboardControls/signUpSignin/MainDashboard'
 
 const App = () => {
   const {colors,index} = useContext(ContextProvider)
