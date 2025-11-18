@@ -66,7 +66,7 @@ const AnimatedProduct = () => {
                     style={{ rotate: `${item}deg` }} // ✅ dynamic rotation
 
                 >
-                    <img id={i} src={`/${i + 1}.jpeg`} className='object-cover w-full' alt="" />
+                    <img id={i} src={`/shoppingApp/${i + 1}.jpeg`} className='object-cover w-full' alt="" />
 
 
                 </motion.div>

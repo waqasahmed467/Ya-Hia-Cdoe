@@ -30,7 +30,7 @@ const ManageProduct = () => {
 
 
   return (
-    <div className="w-full">
+    <div className="w-full h-screen">
       {
         ShowAnimatedProduct ?
           <div className="flex  w-full overflow-hidden  text-white">
@@ -56,7 +56,7 @@ const ManageProduct = () => {
               <div className="h-full w-full flex gap-5">
                 {/* ✅ LEFT SIDE — Animated Product Images */}
 
-                <div className="w-[70%]  bg-white/10 backdrop-blur-lg p-5 rounded-2xl shadow-lg  h-[80%]">
+                <div className="w-[70%]  bg-white/10 backdrop-blur-lg p-5 rounded-2xl shadow-lg   h-[90%]">
 
                   <h1 className="text-2xl mb-3 font-semibold">Your Products</h1>
 
@@ -109,7 +109,7 @@ const ManageProduct = () => {
                     </AnimatePresence>
                   </div>
                 </div>
-                <div className="w-[34%]  rounded-2xl p-3 bg-white/10 backdrop-blur-md shadow-lg border border-white/20">
+                <div className="w-[34%]  h-[500px] rounded-2xl  p-3 bg-white/10 backdrop-blur-md shadow-lg border border-white/20">
 
                   {/* Image Preview */}
                   {preview ? (

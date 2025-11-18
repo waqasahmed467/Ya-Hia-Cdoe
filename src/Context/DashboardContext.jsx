@@ -27,7 +27,6 @@ export const DashboardData = ({ children }) => {
       setAnimatedShow(res.data)
     }
     catch(error){
-      console.log(error.responce);
       
 
     }
@@ -99,10 +98,12 @@ catch(error){
    useEffect(()=>{
     ProductDataShow()
 handleProductAnimated()
-   },[ProductDataShow,handleProductAnimated])
+   },[])
   
   return (
-    <DashboardContext.Provider value={{image,setimage,handleProductAnimated,
+    <DashboardContext.Provider value={{
+      
+      image,setimage,handleProductAnimated,
      AnimatedShow, handleProductDataUpload,handleDataDelete,
       price,setprice,setquntity,allProductDataDB,
       preview,setPreview,ProductDec,quntity, setProductDec,ProductTitle,setProductTitle,ActiveDash, setActiveDash }}>

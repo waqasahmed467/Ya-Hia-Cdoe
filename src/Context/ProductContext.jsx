@@ -22,7 +22,8 @@ export const ProductProvider = ({ children }) => {
   const [allProductDataDB, setallProductDataDB] = useState([])
   const [ProductDeteils, setProductDeteils] = useState([])
   const [DomainName, setDomainName] = useState('http://127.0.0.1:8000/')
-
+const [email, setemail] = useState('')
+const [password, setpassword] = useState('')
   const [index, setIndex] = useState(0);
 
   const fetchCartItems = async () => {
@@ -108,7 +109,7 @@ setTimeout(() => {
 
   return (
     <ContextProvider.Provider value={{ 
-      addTocart,
+      addTocart,email,setemail,setpassword,password,
       ProductDeteils,setProductDeteils,setReverceCart, fetchCartItems, setLocatStorageCartItemsS, LocatStorageCartItemss, ReverceCart, CartDbItems, AddTOCardSildeShow, setAddTOCardSildeShow, setallProductDataDB, DomainName, allProductDataDB, colors, index, setIndex }}>
       {children}
     </ContextProvider.Provider>

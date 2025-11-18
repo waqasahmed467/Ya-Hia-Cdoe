@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { motion, scale } from "framer-motion";
 import { DashboardContext } from '../Context/DashboardContext';
+import axios from 'axios';
 const AnimatedCardEdit = () => {
     const { AnimatedShow } = useContext(DashboardContext)
     const [Preview, setPreview] = useState()
@@ -16,8 +17,36 @@ const AnimatedCardEdit = () => {
     const [ActivePrivew, setActivePrivew] = useState()
 
 
-    const handleImgPrivew = (e, i) => {
+    const handleImgPrivew = async (e, i) => {
 
+        console.log(ActivePrivew);
+        const file = e.target.files[0]
+        if (file) {
+            const ImgeURl = URL.createObjectURL(file)
+            setPreview(ImgeURl)
+
+        }
+
+        const fronData = new FormData();
+        fronData.append('file', file)
+        fronData.append('index', ActivePrivew)
+        try {
+
+            const res = await axios.post('http://localhost:8000/api/animatedImage',
+                fronData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+
+                }
+            }
+            )
+            console.log(res.data);
+
+        } catch (error) {
+            console.log(error.response.data.message);
+
+
+        }
 
 
 
@@ -125,16 +154,7 @@ const AnimatedCardEdit = () => {
                                                 Upload Image
                                             </button>
                                             <input
-                                                onChange={(e) => {
-                                                    setActivePrivew(i)
-                                                    console.log(ActivePrivew);
-                                                    const file = e.target.files[0]
-                                                    if (file) {
-                                                        const ImgeURl = URL.createObjectURL(file)
-                                                        setPreview(ImgeURl)
-
-                                                    }
-                                                }}
+                                                onChange={(e) => { handleImgPrivew(e), setActivePrivew(i) }}
                                                 className='hover:cursor-pointer opacity-0 absolute top-0 left-0'
                                                 type="file"
                                             />
@@ -142,7 +162,7 @@ const AnimatedCardEdit = () => {
                                     )
                                 }
                                 {
-                                    AnimatedShow.length > 0 && AnimatedShow[i].imageName ? null : <button
+                                    Preview && ActivePrivew == i && <button
                                         onClick={() => setPreview("")}
                                         type="button"
                                         className="absolute top-4 right-4 p-1 px-2 rounded-sm bg-red-500/75 hover:bg-red-500 transition-all"
