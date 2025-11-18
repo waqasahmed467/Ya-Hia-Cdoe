@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
-import Login from './login'
-import Register from './register'
+import Login from './Login'
+import Register from './Register'
 import { motion } from 'motion/react'
 import { ToastContainer } from 'react-toastify'
 
